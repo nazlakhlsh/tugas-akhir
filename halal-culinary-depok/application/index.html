@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skema GUI HalalCulinary Depok</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ffffff; /* Diubah ke putih */
+            padding: 20px;
+            line-height: 1.4;
+            color: #212529;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border: 1px solid #dee2e6;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .user-flow-section {
+            margin-bottom: 50px;
+            border: 1px solid #dee2e6; /* Border lebih tipis */
+            border-radius: 0;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .section-header {
+            background: #495057; /* Diubah ke abu-abu solid */
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wireframe-container {
+            padding: 25px;
+            background: #ffffff; /* Diubah ke putih */
+        }
+
+        /* Wireframe Components */
+        .page-wireframe {
+            background: white;
+            border: 1px solid #ced4da; /* Border lebih tipis */
+            border-radius: 0;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: none; /* Shadow dihilangkan */
+        }
+
+        .page-header {
+            background: #f8f9fa; /* Abu-abu sangat terang */
+            border-bottom: 1px solid #dee2e6;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .page-nav {
+            background: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 12px 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            background: #6c757d; /* Abu-abu netral */
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px; /* Sedikit rounded untuk estetika modern */
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            background: #495057;
+        }
+
+        .page-content {
+            padding: 20px;
+            min-height: 150px;
+        }
+
+        .sidebar {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            width: 180px;
+            float: left;
+            margin-right: 20px;
+            padding: 15px;
+            border-radius: 0;
+            font-size: 13px;
+        }
+
+        .main-content {
+            margin-left: 200px;
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 0;
+            min-height: 200px;
+        }
+
+        .form-section {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0;
+        }
+
+        .table-section {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0;
+        }
+
+        .map-section {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            font-size: 20px;
+            color: #6c757d;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .wire-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 14px; /* Padding disesuaikan */
+            margin: 3px;
+            border-radius: 4px;
+            font-size: 12px; /* Font size disesuaikan */
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .wire-button.secondary {
+            background: #6c757d;
+        }
+
+        .wire-button.danger {
+            background: #dc3545;
+        }
+
+        .wire-button.warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .wire-input {
+            border: 1px solid #ced4da;
+            padding: 8px 10px;
+            margin: 3px;
+            border-radius: 4px;
+            font-size: 13px;
+            width: 100%;
+        }
+        
+        select.wire-input {
+             -webkit-appearance: none;
+             -moz-appearance: none;
+             appearance: none;
+             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+             background-repeat: no-repeat;
+             background-position: right 0.75rem center;
+             background-size: 16px 12px;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 1px solid;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            border-color: #ffeeba;
+        }
+
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .info-box {
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .notification-box {
+             padding: 10px;
+             margin-bottom: 5px;
+             font-size: 12px;
+             border: 1px solid transparent;
+        }
+        
+        .stat-box {
+            padding: 15px;
+            text-align: center;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                float: none;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .page-nav {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SKEMA GUI HALALCULINARY DEPOK</h1>
+            <p>Wireframe & User Flow Mapping - Sistem Manajemen Kuliner Halal</p>
+        </div>
+
+        <div class="content">
+            <!-- ALUR PENGGUNA UMUM -->
+            <div class="user-flow-section">
+                <div class="section-header">
+                    <span>1. ALUR PENGGUNA UMUM / PUBLIK (Tidak Login)</span>
+                </div>
+                <div class="wireframe-container">
+                    
+                    <div class="page-wireframe">
+                        <div class="page-header">
+                            <span>🏠 HALAMAN BERANDA (PUBLIK)</span>
+                            <span>Login / Daftar</span>
+                        </div>
+                        <div class="page-nav">
+                            <div class="nav-item">Tentang Halal</div>
+                            <div class="nav-item">Sertifikasi Halal</div>
+                            <div class="nav-item">Peta Kuliner</div>
+                        </div>
+                        <div class="page-content">
+                            <div style="text-align: center; padding: 20px;">
+                                <h3>HalalCulinary Depok</h3>
+                                <p style="margin: 10px 0;">Temukan kuliner halal terpercaya di Depok</p>
+                                <div class="info-box" style="background: #f8f9fa; text-align: left;">
+                                    <strong>Fitur Utama:</strong><br>
+                                    • Peta Interaktif Outlet Halal<br>
+                                    • Informasi Sertifikasi<br>
+                                    • Panduan Kuliner Halal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">⬇️</div>
+
+                    <div class="grid-2">
+                        <div class="page-wireframe">
+                            <div class="page-header"><span>ℹ️ TENTANG HALAL</span></div>
+                            <div class="page-content">
+                                <div class="info-box">
+                                    <strong>4 Pilar Utama:</strong><br>
+                                    • Apa Itu Halal?<br>
+                                    • Jaminan Kualitas<br>
+                                    • Manfaat Kesehatan<br>
+                                    • Akseptabilitas Universal
+                                </div>
+                                <div class="info-box">
+                                    <strong>Prinsip Makanan Halal:</strong><br>
+                                    • Bebas Babi<br>
+                                    • Tanpa Alkohol<br>
+                                    • Penyembelihan Syar’i
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="page-wireframe">
+                            <div class="page-header"><span>📜 SERTIFIKASI HALAL</span></div>
+                            <div class="page-content">
+                                <div class="info-box">
+                                    <strong>Lembaga Resmi:</strong><br>
+                                    • BPJPH (Badan Penyelenggara JPH)<br>
+                                    • MUI (Majelis Ulama Indonesia)
+                                </div>
+                                <div class="info-box">
+                                    <strong>Alur & Syarat Sertifikasi:</strong><br>
+                                    • Reguler (Audit Menyeluruh)<br>
+                                    • SEHATI (Self Declare)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-wireframe">
+                        <div class="page-header"><span>🗺️ PETA KULINER</span></div>
+                        <div class="page-content clearfix">
+                            <div class="sidebar">
+                                <strong>Filter Pencarian</strong><br><br>
+                                <label>Kategori:</label><br>
+                                <select class="wire-input"><option>Semua Kategori</option></select><br><br>
+                                <label>Kecamatan:</label><br>
+                                <select class="wire-input"><option>Pilih Kecamatan</option></select><br><br>
+                                <label>Harga:</label><br>
+                                <select class="wire-input"><option>Semua Harga</option></select><br><br>
+                                <button class="wire-button">Cari</button>
+                            </div>
+                            <div class="main-content">
+                                <div class="map-section" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                                    <strong>PETA INTERAKTIF</strong>
+                                </div>
+                                <div style="margin-top: 15px;">
+                                    <div class="notification-box status-rejected">Notifikasi: "Tidak ada outlet dalam radius 10 km"</div>
+                                    <div class="notification-box status-pending">Pesan: "Pencarian tidak ditemukan"</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">⬇️</div>
+
+                    <div class="grid-2">
+                        <div class="page-wireframe">
+                            <div class="page-header"><span>🔐 HALAMAN LOGIN</span></div>
+                            <div class="page-content">
+                                <div class="form-section">
+                                    <h4>Masuk ke Akun Anda</h4><br>
+                                    <label>Email:</label><br>
+                                    <input class="wire-input" placeholder="email@example.com"><br><br>
+                                    <label>Password:</label><br>
+                                    <input class="wire-input" type="password" placeholder="********"><br><br>
+                                    <button class="wire-button">LOGIN</button><br><br>
+                                    <div style="text-align: center;"><a href="#" style="color: #007bff; font-size: 12px;">Buat Akun Baru →</a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="page-wireframe">
+                            <div class="page-header"><span>📝 BUAT AKUN BARU</span></div>
+                            <div class="page-content">
+                                <div class="form-section">
+                                    <h4>Daftar (Pelaku UMKM)</h4><br>
+                                    <label>Nama:</label><br>
+                                    <input class="wire-input" placeholder="Masukkan nama lengkap"><br><br>
+                                    <label>Email:</label><br>
+                                    <input class="wire-input" placeholder="email@example.com"><br><br>
+                                    <label>Password:</label><br>
+                                    <input class="wire-input" type="password" placeholder="Buat password"><br><br>
+                                    <label>Konfirmasi Password:</label><br>
+                                    <input class="wire-input" type="password" placeholder="Ulangi password"><br><br>
+                                    <button class="wire-button">DAFTAR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALUR UMKM -->
+            <div class="user-flow-section">
+                <div class="section-header">
+                    <span>2. ALUR PELAKU UMKM (Setelah Login)</span>
+                </div>
+                <div class="wireframe-container">
+                    
+                    <div class="page-wireframe">
+                        <div class="page-header">
+                            <span>🏠 BERANDA (UMKM)</span>
+                            <span style="font-size: 13px;">
+                                <select class="wire-input" style="padding: 4px 8px; font-size: 12px; width: auto;">
+                                    <option>Nama Pengguna</option>
+                                    <option>-- Daftarkan Usaha --</option>
+                                </select>
+                                <button class="wire-button secondary" style="font-size: 12px; padding: 4px 8px;">Logout</button>
+                            </span>
+                        </div>
+                        <div class="page-content">
+                            <h2 style="margin-bottom: 20px;">DASHBOARD</h2>
+                            <p>Selamat datang! Klik nama Anda di pojok kanan atas untuk mendaftarkan usaha.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">⬇️</div>
+                    
+                    <div class="page-wireframe">
+                        <div class="page-header"><span>➕ DAFTARKAN USAHA</span></div>
+                        <div class="page-content">
+                            <div class="form-section">
+                                <strong>1. Informasi Usaha</strong>
+                                <input class="wire-input" placeholder="Nama Usaha">
+                                <select class="wire-input"><option>Pilih Kategori</option></select>
+                                <select class="wire-input"><option>Pilih Rentang Harga</option></select>
+                                <input class="wire-input" placeholder="Jam Buka (Contoh: 08:00 - 21:00)">
+                                <label style="font-size: 12px; display: block; margin-top: 5px;">Foto Outlet: <input type="file" class="wire-input"></label>
+                            </div>
+                             <div class="form-section">
+                                <strong>2. Detail Lokasi</strong>
+                                <textarea class="wire-input" style="height: 60px;" placeholder="Alamat Lengkap"></textarea>
+                                <select class="wire-input"><option>Pilih Kecamatan</option></select>
+                                <div style="display:flex; gap: 10px;"><input class="wire-input" placeholder="Latitude"><input class="wire-input" placeholder="Longitude"></div>
+                                <input class="wire-input" placeholder="Link Google Maps">
+                            </div>
+                             <div class="form-section">
+                                <strong>3. Sertifikasi Halal</strong>
+                                <select class="wire-input"><option>Pilih Status Sertifikasi</option></select>
+                                <input class="wire-input" placeholder="Nomor Sertifikat (jika ada)">
+                                <label style="font-size: 12px; display: block; margin-top: 5px;">Tanggal Berlaku: <input type="date" class="wire-input"></label>
+                            </div>
+                            <button class="wire-button">Simpan Data Usaha</button>
+                            <div style="margin-top: 15px;">
+                                <div class="notification-box status-approved">Notifikasi: "Data sedang menunggu verifikasi."</div>
+                                <div class="notification-box status-rejected">Pesan Error: "Nama usaha duplikat."</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-wireframe">
+                        <div class="page-header"><span>🏪 OUTLET SAYA</span></div>
+                        <div class="page-content">
+                            <div class="table-section">
+                                <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+                                    <tr style="background: #f8f9fa;">
+                                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Nama Usaha</th>
+                                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Status</th>
+                                        <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Aksi</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px; border: 1px solid #dee2e6;">Soto Betawi Bang Husen</td>
+                                        <td style="padding: 10px; border: 1px solid #dee2e6;"><span class="status-badge status-pending">Pending</span></td>
+                                        <td style="padding: 10px; border: 1px solid #dee2e6;"><button class="wire-button secondary">Lihat</button> <button class="wire-button warning">Edit</button> <button class="wire-button danger">Hapus</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-box" style="text-align: center; margin-top: 15px;">
+                                "Anda belum memiliki outlet yang terdaftar"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALUR ADMIN -->
+            <div class="user-flow-section">
+                <div class="section-header">
+                    <span>3. ALUR ADMIN (Setelah Login)</span>
+                </div>
+                <div class="wireframe-container">
+                    
+                    <div class="page-wireframe">
+                        <div class="page-header">
+                            <span>🛡️ ADMIN PANEL</span>
+                             <span style="font-size: 13px;">Admin | <a href="#" style="color:#007bff;">Dashboard</a> | <button class="wire-button secondary" style="font-size: 12px; padding: 4px 8px;">Logout</button>
+                            </span>
+                        </div>
+                         <div class="page-content clearfix">
+                            <div class="sidebar">
+                                <strong>MENU</strong><br><br>
+                                <div style="margin: 8px 0;"><button class="wire-button" style="width: 100%; text-align: left; background-color:#007bff;">Dashboard</button></div>
+                                <div style="margin: 8px 0;"><button class="wire-button secondary" style="width: 100%; text-align: left;">Kelola Kuliner</button></div>
+                                <div style="margin: 8px 0;"><button class="wire-button secondary" style="width: 100%; text-align: left;">Kelola User</button></div>
+                            </div>
+                            <div class="main-content">
+                                <h4>Dashboard Admin</h4>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin: 15px 0;">
+                                    <div class="stat-box"><strong>Jumlah Usaha</strong><br><span style="font-size: 24px;">150</span></div>
+                                    <div class="stat-box"><strong>Terverifikasi</strong><br><span style="font-size: 24px;">120</span></div>
+                                    <div class="stat-box"><strong>Pending</strong><br><span style="font-size: 24px;">25</span></div>
+                                    <div class="stat-box"><strong>Ditolak</strong><br><span style="font-size: 24px;">5</span></div>
+                                    <div class="stat-box"><strong>Total Pengguna</strong><br><span style="font-size: 24px;">80</span></div>
+                                </div>
+                                <h4>Daftar Usaha Menunggu Verifikasi</h4>
+                                 <div class="info-box" style="padding:10px;">
+                                     <div style="display: flex; justify-content: space-between; align-items: center; font-size:13px;">
+                                         <span>Warung Nasi Gudeg Bu Sari</span>
+                                         <button class="wire-button warning">Review Detail</button>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">⬇️</div>
+
+                    <div class="grid-2">
+                        <div class="page-wireframe">
+                            <div class="page-header"><span>🍲 KELOLA KULINER</span></div>
+                            <div class="page-content">
+                                <div style="margin-bottom: 15px;">
+                                    <strong style="font-size:13px;">Filter Status:</strong>
+                                    <button class="wire-button secondary">Semua</button>
+                                    <button class="wire-button status-approved">Terverifikasi</button>
+                                    <button class="wire-button status-pending">Pending</button>
+                                    <button class="wire-button status-rejected">Ditolak</button>
+                                </div>
+                                <div class="table-section">
+                                    <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+                                         <tr style="background: #f8f9fa;">
+                                            <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Nama Usaha</th>
+                                            <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Status</th>
+                                            <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Aksi</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px; border: 1px solid #dee2e6;">Warung Nasi Gudeg Bu Sari</td>
+                                            <td style="padding: 10px; border: 1px solid #dee2e6;"><span class="status-badge status-pending">Pending</span></td>
+                                            <td style="padding: 10px; border: 1px solid #dee2e6;"><button class="wire-button">Setujui</button> <button class="wire-button warning">Tolak</button> <button class="wire-button danger">Hapus</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="page-wireframe">
+                            <div class="page-header"><span>👥 KELOLA USER</span></div>
+                            <div class="page-content">
+                                <div class="table-section">
+                                    <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+                                         <tr style="background: #f8f9fa;">
+                                            <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Nama</th>
+                                            <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Email</th>
+                                            <th style="padding: 10px; border: 1px solid #dee2e6; text-align:left;">Aksi</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px; border: 1px solid #dee2e6;">Budi Santoso</td>
+                                            <td style="padding: 10px; border: 1px solid #dee2e6;">budi.s@example.com</td>
+                                            <td style="padding: 10px; border: 1px solid #dee2e6;"><button class="wire-button danger">Hapus Akun</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

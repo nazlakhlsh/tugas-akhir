@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byond by BSI - Enhanced Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1DB584 0%, #F4A261 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            margin: 20px auto;
+            background: #000;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1DB584 0%, #F4A261 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .signal-icons {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-icon:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background: #F4A261;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .user-name {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .balance-card {
+            margin: 0 20px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+            opacity: 0.1;
+        }
+
+        .account-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .account-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .account-number {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .balance {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .saved-amount {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .action-icon:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .transfer { background: #1DB584; }
+        .bayar { background: #F4A261; }
+        .qris { background: #4A90E2; }
+        .berbagi { background: #E74C3C; }
+        .menu { background: #1DB584; }
+
+        .action-label {
+            font-size: 12px;
+            color: white;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.95);
+            margin: 10px 20px;
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .see-all {
+            color: #F4A261;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-item:hover {
+            background: rgba(29, 181, 132, 0.05);
+            border-radius: 10px;
+            padding-left: 10px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .search-icon-feature { background: #4A90E2; }
+        .shortcut-icon { background: #9B59B6; }
+        .notification-icon { background: #E67E22; }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .search-bar {
+            background: rgba(255,255,255,0.9);
+            margin: 0 20px 20px 20px;
+            border-radius: 25px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+            color: #333;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 15px 0 25px 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-icon {
+            background: #1DB584;
+            color: white;
+        }
+
+        .nav-item.active .nav-label {
+            color: #1DB584;
+        }
+
+        .nav-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background: #E74C3C;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .shortcut-panel {
+            background: rgba(255,255,255,0.9);
+            margin: 0 20px;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .shortcut-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .shortcut-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .shortcut-item:hover {
+            background: rgba(29, 181, 132, 0.1);
+            transform: scale(1.05);
+        }
+
+        .shortcut-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .shortcut-label {
+            font-size: 11px;
+            color: #333;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .new-badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background: #E74C3C;
+            color: white;
+            font-size: 8px;
+            padding: 2px 4px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div class="screen">
+            <div class="status-bar">
+                <span>22.53</span>
+                <div class="signal-icons">
+                    <span>●●●</span>
+                    <span>📶</span>
+                    <span>🔋</span>
+                </div>
+            </div>
+
+            <div class="header">
+                <div class="logo">
+                    <strong>B BYOND</strong>
+                    <div style="font-size: 12px; font-weight: normal;">by BSI</div>
+                </div>
+                <div class="search-icon" onclick="toggleSearch()">
+                    🔍
+                </div>
+            </div>
+
+            <!-- Enhanced Search Bar -->
+            <div class="search-bar" id="searchBar" style="display: none;">
+                <span style="color: #1DB584;">🔍</span>
+                <input type="text" class="search-input" placeholder="Cari fitur, transaksi, atau bantuan..." />
+                <span style="color: #999; cursor: pointer;" onclick="toggleSearch()">✕</span>
+            </div>
+
+            <div class="user-info">
+                <div class="avatar">N</div>
+                <div class="user-name">Nisa</div>
+            </div>
+
+            <div class="balance-card">
+                <div class="account-type">
+                    <div class="account-name">Easy Wadiah</div>
+                    <div class="account-number">
+                        7205497654
+                        <span style="cursor: pointer;">📋</span>
+                    </div>
+                </div>
+                <div class="balance">Rp 0</div>
+                <div class="saved-amount">Saldo tertahan Rp 50.000,00</div>
+            </div>
+
+            <!-- Quick Access Shortcuts Panel -->
+            <div class="shortcut-panel">
+                <div class="shortcut-title">
+                    ⚡ Akses Cepat
+                    <span class="new-badge">BARU</span>
+                </div>
+                <div class="shortcut-grid">
+                    <div class="shortcut-item" onclick="showNotification('Akses cepat ke Mutasi Rekening')">
+                        <div class="shortcut-icon" style="background: #4A90E2;">📊</div>
+                        <div class="shortcut-label">Mutasi</div>
+                    </div>
+                    <div class="shortcut-item" onclick="showNotification('Akses cepat ke Transfer Favorit')">
+                        <div class="shortcut-icon" style="background: #1DB584;">⭐</div>
+                        <div class="shortcut-label">Transfer Favorit</div>
+                    </div>
+                    <div class="shortcut-item" onclick="showNotification('Akses cepat ke QRIS Pay')">
+                        <div class="shortcut-icon" style="background: #9B59B6;">📱</div>
+                        <div class="shortcut-label">QRIS Pay</div>
+                    </div>
+                    <div class="shortcut-item" onclick="showNotification('Akses cepat ke Pembayaran Rutin')">
+                        <div class="shortcut-icon" style="background: #E67E22;">🔄</div>
+                        <div class="shortcut-label">Auto Pay</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <div class="action-item">
+                    <div class="action-icon transfer">✈</div>
+                    <div class="action-label">Transfer</div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon bayar">🧾</div>
+                    <div class="action-label">Bayar & Beli</div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon qris">📱</div>
+                    <div class="action-label">QRIS</div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon berbagi">💝</div>
+                    <div class="action-label">Berbagi</div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon menu">⋯</div>
+                    <div class="action-label">Menu</div>
+                </div>
+            </div>
+
+            <!-- Enhanced Features Section -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">🚀 Fitur Terbaru</div>
+                    <div class="see-all">Lihat Semua</div>
+                </div>
+
+                <div class="feature-item" onclick="showNotification('Fitur pencarian pintar telah diaktifkan!')">
+                    <div class="feature-icon search-icon-feature">🔍</div>
+                    <div class="feature-content">
+                        <div class="feature-title">Smart Search</div>
+                        <div class="feature-desc">Cari fitur dengan keyword yang tepat tanpa perlu navigasi berlapis</div>
+                    </div>
+                    <div class="new-badge">BARU</div>
+                </div>
+
+                <div class="feature-item" onclick="showNotification('Dashboard shortcut siap digunakan!')">
+                    <div class="feature-icon shortcut-icon">⚡</div>
+                    <div class="feature-content">
+                        <div class="feature-title">Quick Access Dashboard</div>
+                        <div class="feature-desc">Akses langsung ke fitur mutasi rekening dan transaksi favorit</div>
+                    </div>
+                    <div class="new-badge">BARU</div>
+                </div>
+
+                <div class="feature-item" onclick="showNotification('Notifikasi real-time aktif!')">
+                    <div class="feature-icon notification-icon pulse">🔔</div>
+                    <div class="feature-content">
+                        <div class="feature-title">Real-time Notifications</div>
+                        <div class="feature-desc">Notifikasi instan untuk transaksi dana masuk dan keluar</div>
+                    </div>
+                    <div class="new-badge">AKTIF</div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item active">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Beranda</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-label">Portofolio</div>
+                </div>
+                <div class="nav-item">
+                    <div style="position: relative;">
+                        <div class="nav-icon">🔔</div>
+                        <div class="notification-badge">3</div>
+                    </div>
+                    <div class="nav-label">Notifikasi</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Profil</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSearch() {
+            const searchBar = document.getElementById('searchBar');
+            if (searchBar.style.display === 'none' || searchBar.style.display === '') {
+                searchBar.style.display = 'flex';
+                searchBar.querySelector('.search-input').focus();
+            } else {
+                searchBar.style.display = 'none';
+            }
+        }
+
+        function showNotification(message) {
+            // Create notification popup
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(29, 181, 132, 0.95);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                font-weight: 500;
+                z-index: 1000;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Add CSS animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+                    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                    document.head.removeChild(style);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-input');
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                if (query.length > 2) {
+                    showNotification(`Mencari: "${query}"`);
+                }
+            });
+        });
+
+        // Add interactive hover effects
+        document.querySelectorAll('.action-item, .feature-item, .shortcut-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
