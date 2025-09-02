@@ -1,0 +1,761 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	line-height: 1.6;
+	color: #333;
+	background-color: #f5f5f5;
+}
+
+/* Header Navigation */
+.header {
+	background: linear-gradient(135deg, #2c5530, #4a7c59);
+	color: white;
+	padding: 1rem 0;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 1000;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.nav-menu {
+	display: flex;
+	list-style: none;
+	gap: 2rem;
+}
+
+.nav-menu a {
+	color: white;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+	color: #a8d5a8;
+}
+
+.container {
+	margin-top: 80px;
+}
+
+/* Hero Section */
+.hero {
+	background: white;
+	padding: 3rem 0;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-hero {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 3rem;
+	align-items: center;
+}
+
+.hero-image img {
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	border-radius: 15px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.hero-text h1 {
+	font-size: 2.5rem;
+	color: #2c5530;
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.hero-text p {
+	margin-bottom: 1rem;
+	color: #666;
+	font-size: 1.1rem;
+}
+
+.features {
+	margin: 2rem 0;
+}
+
+.features h3 {
+	color: #2c5530;
+	margin-bottom: 1rem;
+}
+
+.feature-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.5rem;
+}
+
+.feature-item {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #666;
+}
+
+.feature-item i {
+	color: #4a7c59;
+	width: 20px;
+}
+
+/* About Halal Section - Container Utama */
+.about-halal {
+	padding: 4rem 0;
+	background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+	position: relative;
+}
+
+.about-halal::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: linear-gradient(90deg, #2c5530, #4a7c59, #2c5530);
+}
+
+.about-halal-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+/* Section Title */
+.section-title {
+	text-align: center;
+	margin-bottom: 4rem;
+	position: relative;
+}
+
+.section-title::after {
+	content: "";
+	width: 80px;
+	height: 3px;
+	background: linear-gradient(90deg, #2c5530, #4a7c59);
+	display: block;
+	margin: 1rem auto 0;
+	border-radius: 2px;
+}
+
+.section-title h2 {
+	font-size: 2.8rem;
+	color: #2c5530;
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	font-weight: 700;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-title h2 i {
+	font-size: 2.4rem;
+	color: #4a7c59;
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+}
+
+.section-title p {
+	font-size: 1.2rem;
+	color: #666;
+	max-width: 700px;
+	margin: 0 auto;
+	line-height: 1.7;
+	font-weight: 400;
+}
+
+/* Halal Content Cards */
+.halal-content {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 2rem;
+	margin-bottom: 4rem;
+}
+
+.halal-card {
+	background: white;
+	padding: 2.5rem 2rem;
+	border-radius: 20px;
+	box-shadow: 0 8px 25px rgba(44, 85, 48, 0.1);
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+	border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.halal-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: linear-gradient(90deg, #2c5530, #4a7c59);
+	transform: scaleX(0);
+	transition: transform 0.4s ease;
+}
+
+.halal-card:hover::before {
+	transform: scaleX(1);
+}
+
+.halal-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 15px 40px rgba(44, 85, 48, 0.2);
+	border-color: #4a7c59;
+}
+
+.halal-card i {
+	font-size: 3rem;
+	color: #4a7c59;
+	margin-bottom: 1.5rem;
+	display: block;
+	transition: all 0.3s ease;
+}
+
+.halal-card:hover i {
+	transform: scale(1.1);
+	color: #2c5530;
+}
+
+.halal-card h3 {
+	font-size: 1.4rem;
+	color: #2c5530;
+	margin-bottom: 1rem;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.halal-card p {
+	color: #666;
+	line-height: 1.7;
+	font-size: 1rem;
+	margin: 0;
+}
+
+/* Halal Principles Section */
+.halal-principles {
+	background: white;
+	padding: 3rem 2.5rem;
+	border-radius: 25px;
+	box-shadow: 0 10px 30px rgba(44, 85, 48, 0.1);
+	margin-bottom: 3rem;
+	position: relative;
+	border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+.halal-principles::before {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	right: -2px;
+	bottom: -2px;
+	background: linear-gradient(135deg, #2c5530, #4a7c59, #2c5530);
+	border-radius: 25px;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.halal-principles:hover::before {
+	opacity: 0.1;
+}
+
+.halal-principles h3 {
+	font-size: 2rem;
+	color: #2c5530;
+	margin-bottom: 2.5rem;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	font-weight: 600;
+}
+
+.halal-principles h3 i {
+	font-size: 1.8rem;
+	color: #4a7c59;
+}
+
+.principles-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 1.5rem;
+}
+
+.principle-item {
+	text-align: center;
+	padding: 2rem 1.5rem;
+	border-radius: 15px;
+	border: 2px solid transparent;
+	background: #f8f9fa;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+}
+
+.principle-item::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	background: rgba(74, 124, 89, 0.1);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.6s ease;
+	z-index: 0;
+}
+
+.principle-item:hover::before {
+	width: 200%;
+	height: 200%;
+}
+
+.principle-item:hover {
+	background: white;
+	border-color: #4a7c59;
+	transform: translateY(-4px);
+	box-shadow: 0 8px 25px rgba(44, 85, 48, 0.15);
+}
+
+.principle-item > * {
+	position: relative;
+	z-index: 1;
+}
+
+.principle-item i {
+	font-size: 2.5rem;
+	color: #4a7c59;
+	margin-bottom: 1.5rem;
+	transition: all 0.3s ease;
+}
+
+.principle-item:hover i {
+	transform: scale(1.2);
+	color: #2c5530;
+}
+
+.principle-item h4 {
+	font-size: 1.2rem;
+	color: #2c5530;
+	margin-bottom: 0.8rem;
+	font-weight: 600;
+}
+
+.principle-item p {
+	color: #666;
+	font-size: 0.95rem;
+	line-height: 1.5;
+	margin: 0;
+}
+
+/* Certification Info Section */
+.certification-info {
+	background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+	padding: 3rem 2.5rem;
+	border-radius: 25px;
+	box-shadow: 0 10px 30px rgba(44, 85, 48, 0.1);
+	text-align: center;
+	border: 1px solid rgba(74, 124, 89, 0.1);
+	position: relative;
+}
+
+.certification-info::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: linear-gradient(90deg, #2c5530, #4a7c59, #2c5530);
+	border-radius: 0 0 25px 25px;
+}
+
+.certification-info h3 {
+	font-size: 2rem;
+	color: #2c5530;
+	margin-bottom: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	font-weight: 600;
+}
+
+.certification-info h3 i {
+	font-size: 1.8rem;
+	color: #4a7c59;
+	animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.certification-info p {
+	font-size: 1.1rem;
+	color: #666;
+	margin-bottom: 2.5rem;
+	line-height: 1.8;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.cert-logos {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
+
+.cert-logo {
+	background: white;
+	padding: 1.5rem 2rem;
+	border-radius: 15px;
+	border: 2px solid #e0e0e0;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	min-width: 120px;
+	position: relative;
+	overflow: hidden;
+}
+
+.cert-logo::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(74, 124, 89, 0.1),
+		transparent
+	);
+	transition: left 0.6s ease;
+}
+
+.cert-logo:hover::before {
+	left: 100%;
+}
+
+.cert-logo:hover {
+	border-color: #4a7c59;
+	background: linear-gradient(135deg, #f0f8f0, white);
+	transform: translateY(-4px);
+	box-shadow: 0 8px 25px rgba(44, 85, 48, 0.15);
+}
+
+.cert-logo strong {
+	color: #2c5530;
+	display: block;
+	margin-bottom: 0.5rem;
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+
+.cert-logo small {
+	color: #666;
+	font-size: 0.9rem;
+	line-height: 1.4;
+}
+
+/* Footer */
+.footer {
+	background: #2c5530;
+	color: white;
+	text-align: center;
+	padding: 2rem 0;
+	margin-top: 3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.container-hero {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.hero-text h1 {
+		font-size: 2rem;
+	}
+
+	.about-halal {
+		padding: 3rem 0;
+	}
+
+	.about-halal-container {
+		padding: 0 1rem;
+	}
+
+	.section-title h2 {
+		font-size: 2.2rem;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.halal-content {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+	}
+
+	.halal-card {
+		padding: 2rem 1.5rem;
+	}
+
+	.halal-principles {
+		padding: 2rem 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.principles-grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.certification-info {
+		padding: 2rem 1.5rem;
+	}
+
+	.cert-logos {
+		gap: 1rem;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+/* Main Content Sections */
+.main-content {
+	display: grid;
+	grid-template-columns: 1fr 350px;
+	gap: 2rem;
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 0 2rem;
+}
+
+.map-container {
+	background: white;
+	border-radius: 15px;
+	overflow: hidden;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+	height: 600px;
+}
+
+#mapid {
+	height: 100%;
+	width: 100%;
+}
+
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.filter-section,
+.outlet-list {
+	background: white;
+	padding: 1.5rem;
+	border-radius: 15px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section h3,
+.outlet-list h3 {
+	color: #2c5530;
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.filter-group {
+	margin-bottom: 1rem;
+}
+
+.filter-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: 600;
+	color: #333;
+}
+
+.filter-group select,
+.filter-group input {
+	width: 100%;
+	padding: 0.8rem;
+	border: 2px solid #e0e0e0;
+	border-radius: 8px;
+	font-size: 1rem;
+	transition: border-color 0.3s;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+	outline: none;
+	border-color: #4a7c59;
+}
+
+.outlet-list {
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.outlet-item {
+	padding: 1rem;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	margin-bottom: 1rem;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.outlet-item:hover {
+	background-color: #f8f9fa;
+	border-color: #4a7c59;
+	transform: translateY(-2px);
+}
+
+.outlet-name {
+	font-weight: bold;
+	color: #2c5530;
+	margin-bottom: 0.5rem;
+}
+
+.outlet-info {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.3rem;
+	color: #666;
+	font-size: 0.9rem;
+}
+
+.outlet-info i {
+	color: #4a7c59;
+	width: 15px;
+}
+
+.popup-content {
+	font-family: inherit;
+}
+
+.popup-title {
+	font-weight: bold;
+	color: #2c5530;
+	margin-bottom: 0.5rem;
+	font-size: 1.1rem;
+}
+
+.popup-info {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.3rem;
+	color: #666;
+}
+
+.popup-info i {
+	color: #4a7c59;
+	width: 15px;
+}
+
+.halal-badge {
+	background: #4a7c59;
+	color: white;
+	padding: 0.2rem 0.5rem;
+	border-radius: 12px;
+	font-size: 0.8rem;
+	margin-left: auto;
+}
+
+.footer {
+	background: #2c5530;
+	color: white;
+	text-align: center;
+	padding: 2rem 0;
+	margin-top: 3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.container-hero {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.hero-text h1 {
+		font-size: 2rem;
+	}
+
+	.main-content {
+		grid-template-columns: 1fr;
+	}
+
+	.halal-content {
+		grid-template-columns: 1fr;
+	}
+
+	.section-title h2 {
+		font-size: 2rem;
+	}
+
+	.principles-grid {
+		grid-template-columns: 1fr;
+	}
+}
